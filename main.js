@@ -233,7 +233,7 @@ console.log( 'The unique vendors are: ', uniqueVendors );
 
 var uniqueCustomers = [];
 
-function hasCustomer(transaction, index, self) {
+function hasCustomer(transaction, index) {
 
   if(transaction.customer === undefined) {
     return false;
