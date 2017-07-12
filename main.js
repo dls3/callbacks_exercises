@@ -215,7 +215,7 @@ function hasVendor(transaction) {
 
 transactions.filter(hasVendor);
 
-console.log( 'The unique vendors are: ', uniqueVendors );
+console.log( 'The vendors are: ', uniqueVendors );
 
 
 // --------------------------------------------------
@@ -270,9 +270,21 @@ console.log( 'The unique customers are: ', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders;
+
+var bigSpenders = [];
+
+transactions.filter(isBigSpender);
+
+function isBigSpender(transaction) {
+ if (transaction.items.length >= 5) {
+   numItems = transaction.items.length + ' items';
+   customerName = transaction.customer
+   bigSpenders.push(customerName, numItems);
+ }
+}
 
 console.log( 'The "big spenders" are:', bigSpenders );
+
 
 
 // --------------------------------------------------
