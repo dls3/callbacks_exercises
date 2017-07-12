@@ -296,10 +296,22 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
+var sale = transactions.filter(isSale);
+var items = sale[0]['items'];
+
+var sumSales = items.reduce(function(sum, item) {
+   return sum + item['price'];
+ }, 0);
+
+function isSale(transaction) {
+   if (transaction.type === 'sale') {
+     return true;
+   }
+ }
+
 var sumSales;
 
-console.log( 'The sum of all sales is:', sumSales );
-
+console.log( 'The sum of the first sale is:', sumSales );
 
 // --------------------------------------------------
 // QUESTION 09
@@ -312,10 +324,23 @@ console.log( 'The sum of all sales is:', sumSales );
   - Make sure to include 'price' information from *all* purchases.
 */
 
-var sumPurchases;
+var sumPurchases = isPurchase(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
 
-console.log( 'The sum of all purhcases is:', sumPurchases );
+function isPurchase(transactions) {
+  var purchases = [];
+  for (var i = 0; i < transactions.length; i++) {
+  if (transactions[i].type === 'purchase') {
+    for (var j = 0; j < transactions[i].items.length; j++) {
+      purchases.push(transactions[i].items[j].price);
+      }
+    }
+  }
+  return purchases;
+}
 
+console.log( 'The sum of all purchases is: ', sumPurchases.toFixed(2) );
 
 // --------------------------------------------------
 // QUESTION 10
@@ -330,9 +355,25 @@ console.log( 'The sum of all purhcases is:', sumPurchases );
   HINT(S):
   - Unlike 'QUESTION 08' and 'QUESTION 09', here we're interested in both 'sale' and 'purchase' transactions.
 */
+var netProfit = isSalePurchase(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function isSalePurchase(transactions) {
+  var salePurchase = [];
+  for (var i = 0; i < transactions.length; i++) {
+  if (transactions[i].type === 'purchase' || transactions[i].type === 'sale') {
+    for (var j = 0; j < transactions[i].items.length; j++) {
+      salePurchase.push(transactions[i].items[j].price);
+      }
+    }
+  }
+  return salePurchase;
+}
+
 var netProfit;
 
-console.log( 'The net profit is:', netProfit );
+console.log( 'The net profit is:', netProfit.toFixed(2) );
 
 
 // --------------------------------------------------
