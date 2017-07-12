@@ -375,7 +375,6 @@ var netProfit;
 
 console.log( 'The net profit is:', netProfit.toFixed(2) );
 
-
 // --------------------------------------------------
 // QUESTION 11
 // --------------------------------------------------
@@ -385,7 +384,17 @@ console.log( 'The net profit is:', netProfit.toFixed(2) );
   HINTS:
   - The result of this calculation should be a number (not an array, object, or other data type).
 */
-var mostItems;
+
+function mostTransactions(highest, transaction) {
+  var numItems = transaction['items'].length;
+  if (numItems > highest) {
+    return numItems;
+  } else {
+    return highest;
+  }
+}
+
+var mostItems = transactions.reduce(mostTransactions, 0);
 
 console.log( 'The most items sold in a single transaction is:', mostItems );
 
